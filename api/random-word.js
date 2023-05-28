@@ -6,7 +6,7 @@ function getRandomWordFromFile() {
   const scriptDirectory = path.dirname(__filename);
 
   // Construct the file path for "words.txt"
-  const filePath = path.join(scriptDirectory, 'words.txt');
+  const filePath = path.join(scriptDirectory, '../words.txt');
 
   // Read the contents of the file
   const fileContents = fs.readFileSync(filePath, 'utf8');
@@ -26,10 +26,10 @@ function getRandomWordFromFile() {
   // Retrieve the random word
   const randomWord = filteredWordsWithThreeLetters[randomIndex];
 
-  return randomWord;
+  // Capitalize the word
+  const capitalizedWord = randomWord.charAt(0).toUpperCase() + randomWord.slice(1);
+
+  return capitalizedWord;
 }
 
-module.exports = (req, res) => {
-  const word = getRandomWordFromFile();
-  res.json({ word });
-};
+module.exports = getRandomWordFromFile;
